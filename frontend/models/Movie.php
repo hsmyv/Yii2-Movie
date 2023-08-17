@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace frontend\models;
 
 use Yii;
 
@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "movies".
  *
  * @property int $id
+ * @property int $categories_category_id
  * @property string $name
  * @property string $description
  * @property string $content
@@ -29,9 +30,10 @@ class Movie extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'content', 'view'], 'required'],
+            [['categories_category_id', 'name', 'description', 'content',], 'required'],
+            [['categories_category_id'], 'integer'],
             [['content'], 'string'],
-            [['view'], 'integer'],
+            // [['view'], 'integer'],
             [['name', 'description'], 'string', 'max' => 100],
         ];
     }
@@ -43,10 +45,17 @@ class Movie extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'categories_category_id' => 'Category ID',
             'name' => 'Name',
             'description' => 'Description',
             'content' => 'Content',
-            'view' => 'View',
+            // 'view' => 'View',
         ];
+    }
+
+
+    public function getCategoriesCategory()
+    {
+        return $this->hasOne(Category::className(), ['category_id' => 'categories_category_id']);
     }
 }

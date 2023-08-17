@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\models;
+namespace frontend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Movie;
+use frontend\models\Category;
 
 /**
- * MovieSearch represents the model behind the search form of `backend\models\Movie`.
+ * CategorySearch represents the model behind the search form of `frontend\models\Category`.
  */
-class MovieSearch extends Movie
+class CategorySearch extends Category
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class MovieSearch extends Movie
     public function rules()
     {
         return [
-            [['id', 'view'], 'integer'],
-            [['name', 'description', 'content'], 'safe'],
+            [['id'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class MovieSearch extends Movie
      */
     public function search($params)
     {
-        $query = Movie::find();
+        $query = Category::find();
 
         // add conditions that should always apply here
 
@@ -59,12 +59,9 @@ class MovieSearch extends Movie
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'view' => $this->view,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
