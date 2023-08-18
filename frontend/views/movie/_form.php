@@ -2,9 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use frontend\models\Category;
+use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
-/** @var backend\models\Movie $model */
+/** @var frontend\models\Movie $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -14,7 +16,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'categories_category_id')->textInput() ?>
+    <?= $form->field($model, 'categories_category_id')->dropDownList(
+        ArrayHelper::map(Category::find()->all(), 'category_id', 'name'),
+        ['prompt' => 'Select Category']
+    ) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 

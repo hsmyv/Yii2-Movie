@@ -1,15 +1,15 @@
 <?php
 
-namespace frontend\models;
+namespace frontend\modules\settings;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Movie;
+use frontend\modules\settings\models\Category;
 
 /**
- * MovieSearch represents the model behind the search form of `backend\models\Movie`.
+ * CategorySearch represents the model behind the search form of `frontend\modules\settings\models\Category`.
  */
-class MovieSearch extends Movie
+class CategorySearch extends Category
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class MovieSearch extends Movie
     public function rules()
     {
         return [
-            [['id', 'view'], 'integer'],
-            [['name', 'categories_category_id', 'description', 'content'], 'safe'],
+            [['id'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class MovieSearch extends Movie
      */
     public function search($params)
     {
-        $query = Movie::find();
+        $query = Category::find();
 
         // add conditions that should always apply here
 
@@ -55,17 +55,14 @@ class MovieSearch extends Movie
             // $query->where('0=1');
             return $dataProvider;
         }
-        $query->joinWith(['categoriesCategory']);
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'view' => $this->view,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'categories.name', $this->categories_category_id]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
+
         return $dataProvider;
     }
 }

@@ -45,7 +45,7 @@ class Movie extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'categories_category_id' => 'Category ID',
+            'categories_category_id' => 'Category Name',
             'name' => 'Name',
             'description' => 'Description',
             'content' => 'Content',
@@ -56,6 +56,6 @@ class Movie extends \yii\db\ActiveRecord
 
     public function getCategoriesCategory()
     {
-        return $this->hasOne(Category::className(), ['category_id' => 'categories_category_id']);
+        return $this->hasOne(Category::className(), ['id' => 'categories_category_id']);
     }
 }
