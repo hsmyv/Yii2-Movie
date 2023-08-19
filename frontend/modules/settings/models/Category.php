@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name
+ * @property string|null $date_time
  */
 class Category extends \yii\db\ActiveRecord
 {

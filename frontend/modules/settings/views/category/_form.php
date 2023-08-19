@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datetimepicker\DateTimePicker;
 
 /** @var yii\web\View $this */
 /** @var frontend\modules\settings\models\Category $model */
