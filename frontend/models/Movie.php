@@ -19,6 +19,8 @@ class Movie extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public $file;
     public static function tableName()
     {
         return 'movies';
@@ -33,8 +35,9 @@ class Movie extends \yii\db\ActiveRecord
             [['categories_category_id', 'name', 'description', 'content',], 'required'],
             [['categories_category_id'], 'integer'],
             [['content'], 'string'],
+            [['file'], 'file'],
             // [['view'], 'integer'],
-            [['name', 'description'], 'string', 'max' => 100],
+            [['name', 'description', 'logo'], 'string', 'max' => 100],
         ];
     }
 
@@ -49,6 +52,7 @@ class Movie extends \yii\db\ActiveRecord
             'name' => 'Name',
             'description' => 'Description',
             'content' => 'Content',
+            'file'  => 'logo',
             // 'view' => 'View',
         ];
     }
